@@ -14,7 +14,6 @@
 #'
 #' @examples coverage(true_value=0, ll=c(-1, -1, -1, -1), ul=c(1, 1, 1, -0.5))
 coverage <- function(true_value, ll, ul, get=c("coverage", "coverage_mcse"), na.rm=FALSE, ...){
-  assertthat::assert_that(length(ll) == length(ul))
   assertthat::assert_that(length(!is.na(ul) & !is.na(ll)) > 0)
   x <- c()
 
@@ -22,6 +21,7 @@ coverage <- function(true_value, ll, ul, get=c("coverage", "coverage_mcse"), na.
     ul <- ul[!is.na(ul) & !is.na(ll)]
     ll <- ll[!is.na(ul) & !is.na(ll)]
   }
+  assertthat::assert_that(length(ll) == length(ul))
 
   if(any(is.na(c(ul, ll)))){
     x["coverage"] <- NA
