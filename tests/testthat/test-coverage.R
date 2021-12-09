@@ -1,7 +1,3 @@
-test_that("multiplication works", {
-  expect_equal(2 * 2, 4)
-})
-
 test_that("coverage estimation", {
   coverage_vec <- coverage(true_value=0, ll=c(rep(-1,9), 1), ul=c(rep(1,9), 2))
   expect_equal(coverage_vec[['coverage']], 0.9)
