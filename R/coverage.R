@@ -1,6 +1,6 @@
 #' Calculate the coverage
 #'
-#' Calculate the coverage given a vector of confidence intervals and the true value
+#' Estimate the coverage and the Monte Carlo standard error of this estimate given a vector of confidence intervals and the true value.
 #'
 #' @param true_value The true value which should be covered by the interval.
 #' @param ll A numeric vector containing the lower limits of the confidence intervals.
@@ -8,7 +8,7 @@
 #' @param get A character vector containing the values returned by the function.
 #' @param na.rm A logical value indicating whether NA values for ll and ul should be removed before coverage estimation.
 #'
-#' @return named vector containing the estimate and the monte carlo standard error for the coverage.
+#' @return A named vector containing the estimate and the Monte Carlo standard error for the coverage.
 #' @export
 #'
 #' @examples coverage(true_value=0, ll=c(-1, -1, -1, -1), ul=c(1, 1, 1, -0.5))

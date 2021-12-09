@@ -13,13 +13,13 @@ bias(true_value, estimates, get = c("bias", "bias_mcse"), na.rm = FALSE)
 
 \item{get}{A character vector containing the values returned by the function.}
 
-\item{na.rm}{A logical value indicating whether NA values for \code{estimates} should be removed before bias calculation}
+\item{na.rm}{A logical value indicating whether NA values for \code{estimates} should be removed before bias calculation.}
 }
 \value{
-named vector containing the estimate and the monte carlo standard error for the bias
+A named vector containing the estimate and the Monte Carlo standard error for the bias.
 }
 \description{
-Calculates the bias of the model estimates from the true value.
+Calculates the bias of the model estimates from the true value and the Monte Carlo standard error for this estimate.
 }
 \examples{
 bias(true_value=0, estimates=rnorm(100))

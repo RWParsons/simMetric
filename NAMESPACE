@@ -2,3 +2,5 @@
 
 export(bias)
 export(coverage)
+export(empSE)
+export(rejection)

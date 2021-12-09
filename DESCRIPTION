@@ -1,5 +1,5 @@
 Package: simMetric
-Title: What the Package Does (One Line, Title Case)
+Title: Metrics (with Uncertainty) for Simulation Studies that Evaluate Statistical Methods
 Version: 0.0.0.9000
 Authors@R: 
     person(given = "First",

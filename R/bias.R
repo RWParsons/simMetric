@@ -1,14 +1,13 @@
-
 #' Calculate the bias
 #'
-#' Calculates the bias of the model estimates from the true value.
+#' Calculates the bias of the model estimates from the true value and the Monte Carlo standard error for this estimate.
 #'
 #' @param true_value The true value which is being estimated.
 #' @param estimates A numeric vector containing the estimates from the model(s).
 #' @param get A character vector containing the values returned by the function.
-#' @param na.rm A logical value indicating whether NA values for `estimates` should be removed before bias calculation
+#' @param na.rm A logical value indicating whether NA values for `estimates` should be removed before bias calculation.
 #'
-#' @return named vector containing the estimate and the monte carlo standard error for the bias
+#' @return A named vector containing the estimate and the Monte Carlo standard error for the bias.
 #' @export
 #'
 #' @examples bias(true_value=0, estimates=rnorm(100))

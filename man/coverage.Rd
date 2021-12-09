@@ -24,10 +24,10 @@ coverage(
 \item{na.rm}{A logical value indicating whether NA values for ll and ul should be removed before coverage estimation.}
 }
 \value{
-named vector containing the estimate and the monte carlo standard error for the coverage.
+A named vector containing the estimate and the Monte Carlo standard error for the coverage.
 }
 \description{
-Calculate the coverage given a vector of confidence intervals and the true value
+Estimate the coverage and the Monte Carlo standard error of this estimate given a vector of confidence intervals and the true value.
 }
 \examples{
 coverage(true_value=0, ll=c(-1, -1, -1, -1), ul=c(1, 1, 1, -0.5))
