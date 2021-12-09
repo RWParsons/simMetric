@@ -5,14 +5,15 @@
 #' @param se A numeric vector containing the standard errors from the model(s).
 #' @param get A character vector containing the values returned by the function.
 #' @param na.rm A logical value indicating whether NA values for `se` should be removed before modSE calculation.
+#' @param ... Additional arguments to be ignored.
 #'
 #' @return A named vector containing the estimate and the Monte Carlo standard error for the average model standard error.
 #' @export
 #'
 #' @examples modSE(se=runif(n=20, min=1, max=1.5))
-modSE <- function(se, get=c("modSE", "modSE_mcse"), na.rm=FALSE){
+modSE <- function(se, get=c("modSE", "modSE_mcse"), na.rm=FALSE, ...){
   assertthat::assert_that(length(!is.na(se)) > 0)
-  assertthat::assert_that(all(se[!is.na(se)]>0))
+  assertthat::assert_that(all(se[!is.na(se)] > 0))
 
   x <- c()
   if(na.rm){

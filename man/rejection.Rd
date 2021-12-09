@@ -8,7 +8,8 @@ rejection(
   p,
   alpha = 0.05,
   get = c("rejection", "rejection_mcse"),
-  na.rm = FALSE
+  na.rm = FALSE,
+  ...
 )
 }
 \arguments{
@@ -19,6 +20,8 @@ rejection(
 \item{get}{A character vector containing the values returned by the function.}
 
 \item{na.rm}{A logical value indicating whether NA values for \code{p} should be removed before rejection calculation.}
+
+\item{...}{Additional arguments to be ignored.}
 }
 \value{
 A named vector containing the estimate and the Monte Carlo standard error for the rejection.

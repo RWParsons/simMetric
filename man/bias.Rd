@@ -4,7 +4,7 @@
 \alias{bias}
 \title{Calculate the bias}
 \usage{
-bias(true_value, estimates, get = c("bias", "bias_mcse"), na.rm = FALSE)
+bias(true_value, estimates, get = c("bias", "bias_mcse"), na.rm = FALSE, ...)
 }
 \arguments{
 \item{true_value}{The true value which is being estimated.}
@@ -14,6 +14,8 @@ bias(true_value, estimates, get = c("bias", "bias_mcse"), na.rm = FALSE)
 \item{get}{A character vector containing the values returned by the function.}
 
 \item{na.rm}{A logical value indicating whether NA values for \code{estimates} should be removed before bias calculation.}
+
+\item{...}{Additional arguments to be ignored.}
 }
 \value{
 A named vector containing the estimate and the Monte Carlo standard error for the bias.

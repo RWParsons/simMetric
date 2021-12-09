@@ -7,12 +7,13 @@
 #' @param ul A numeric vector containing the upper limits of the confidence intervals.
 #' @param get A character vector containing the values returned by the function.
 #' @param na.rm A logical value indicating whether NA values for ll and ul should be removed before coverage estimation.
+#' @param ... Additional arguments to be ignored.
 #'
 #' @return A named vector containing the estimate and the Monte Carlo standard error for the coverage.
 #' @export
 #'
 #' @examples coverage(true_value=0, ll=c(-1, -1, -1, -1), ul=c(1, 1, 1, -0.5))
-coverage <- function(true_value, ll, ul, get=c("coverage", "coverage_mcse"), na.rm=FALSE){
+coverage <- function(true_value, ll, ul, get=c("coverage", "coverage_mcse"), na.rm=FALSE, ...){
   assertthat::assert_that(length(ll) == length(ul))
   assertthat::assert_that(length(!is.na(ul) & !is.na(ll)) > 0)
   x <- c()

@@ -15,8 +15,9 @@ Roxygen: list(markdown = TRUE)
 RoxygenNote: 7.1.2
 Imports:
   stats,
-  assertthat
+  assertthat,
+  dplyr,
+  purrr
 Suggests: 
-    testthat (>= 3.0.0),
-    dplyr
+    testthat (>= 3.0.0)
 Config/testthat/edition: 3

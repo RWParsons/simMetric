@@ -4,7 +4,7 @@
 \alias{empSE}
 \title{Calculate the empirical standard error}
 \usage{
-empSE(estimates, get = c("empSE", "empSE_mcse"), na.rm = FALSE)
+empSE(estimates, get = c("empSE", "empSE_mcse"), na.rm = FALSE, ...)
 }
 \arguments{
 \item{estimates}{A numeric vector containing the estimates from the model(s).}
@@ -12,6 +12,8 @@ empSE(estimates, get = c("empSE", "empSE_mcse"), na.rm = FALSE)
 \item{get}{A character vector containing the values returned by the function.}
 
 \item{na.rm}{A logical value indicating whether NA values for \code{estimates} should be removed before empSE calculation.}
+
+\item{...}{Additional arguments to be ignored.}
 }
 \value{
 A named vector containing the estimate and the Monte Carlo standard error for the empirical standard error.

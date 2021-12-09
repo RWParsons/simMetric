@@ -6,12 +6,13 @@
 #' @param alpha The nominal significance level specified. The default is `0.05`.
 #' @param get A character vector containing the values returned by the function.
 #' @param na.rm A logical value indicating whether NA values for `p` should be removed before rejection calculation.
+#' @param ... Additional arguments to be ignored.
 #'
 #' @return A named vector containing the estimate and the Monte Carlo standard error for the rejection.
 #' @export
 #'
 #' @examples rejection(p=runif(200, min=0, max=1))
-rejection <- function(p, alpha=0.05, get=c("rejection", "rejection_mcse"), na.rm=FALSE){
+rejection <- function(p, alpha=0.05, get=c("rejection", "rejection_mcse"), na.rm=FALSE, ...){
   assertthat::assert_that(length(!is.na(p)) > 0)
 
   x <- c()

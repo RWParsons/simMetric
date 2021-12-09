@@ -9,7 +9,8 @@ coverage(
   ll,
   ul,
   get = c("coverage", "coverage_mcse"),
-  na.rm = FALSE
+  na.rm = FALSE,
+  ...
 )
 }
 \arguments{
@@ -22,6 +23,8 @@ coverage(
 \item{get}{A character vector containing the values returned by the function.}
 
 \item{na.rm}{A logical value indicating whether NA values for ll and ul should be removed before coverage estimation.}
+
+\item{...}{Additional arguments to be ignored.}
 }
 \value{
 A named vector containing the estimate and the Monte Carlo standard error for the coverage.
