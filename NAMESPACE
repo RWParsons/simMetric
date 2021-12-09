@@ -3,4 +3,6 @@
 export(bias)
 export(coverage)
 export(empSE)
+export(modSE)
+export(mse)
 export(rejection)

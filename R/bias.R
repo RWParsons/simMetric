@@ -29,6 +29,6 @@ bias <- function(true_value, estimates, get=c("bias", "bias_mcse"), na.rm=FALSE)
 
   n <- length(biases)
   x["bias"] <- mean(biases)
-  x["bias_mcse"] <- (sum((biases)^2)) * (1/(n*(n-1)))
+  x["bias_mcse"] <- sum(biases^2) * (1/(n*(n-1)))
   return(x[get])
 }
