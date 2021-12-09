@@ -4,23 +4,31 @@
 \alias{coverage}
 \title{Calculate the coverage}
 \usage{
-coverage(true_value, ll, ul, ...)
+coverage(
+  true_value,
+  ll,
+  ul,
+  get = c("coverage", "coverage_mcse"),
+  na.rm = FALSE
+)
 }
 \arguments{
-\item{ll}{numeric vector}
+\item{true_value}{The true value which should be covered by the interval}
 
-\item{ul}{numeric vector}
+\item{ll}{A numeric vector containing the lower limits of the confidence intervals}
 
-\item{...}{}
+\item{ul}{A numeric vector containing the upper limits of the confidence intervals}
 
-\item{mu_true}{numeric}
+\item{get}{a character vector containing the values returned by the function.}
+
+\item{na.rm}{a logical value indicating whether NA values for ll and ul should be removed before coverage estimation.}
 }
 \value{
-
+named vector containing the estimate and the monte carlo standard error for the coverage.
 }
 \description{
 Calculate the coverage given a vector of confidence intervals and the true value
 }
 \examples{
-coverage(true_value=0, ll=rnorm(10, -1), ul=rnorm(10, 1))
+coverage(true_value=0, ll=rnorm(100, -1), ul=rnorm(100, 1))
 }
