@@ -13,15 +13,15 @@ coverage(
 )
 }
 \arguments{
-\item{true_value}{The true value which should be covered by the interval}
+\item{true_value}{The true value which should be covered by the interval.}
 
-\item{ll}{A numeric vector containing the lower limits of the confidence intervals}
+\item{ll}{A numeric vector containing the lower limits of the confidence intervals.}
 
-\item{ul}{A numeric vector containing the upper limits of the confidence intervals}
+\item{ul}{A numeric vector containing the upper limits of the confidence intervals.}
 
-\item{get}{a character vector containing the values returned by the function.}
+\item{get}{A character vector containing the values returned by the function.}
 
-\item{na.rm}{a logical value indicating whether NA values for ll and ul should be removed before coverage estimation.}
+\item{na.rm}{A logical value indicating whether NA values for ll and ul should be removed before coverage estimation.}
 }
 \value{
 named vector containing the estimate and the monte carlo standard error for the coverage.
@@ -30,5 +30,5 @@ named vector containing the estimate and the monte carlo standard error for the 
 Calculate the coverage given a vector of confidence intervals and the true value
 }
 \examples{
-coverage(true_value=0, ll=rnorm(100, -1), ul=rnorm(100, 1))
+coverage(true_value=0, ll=c(-1, -1, -1, -1), ul=c(1, 1, 1, -0.5))
 }
