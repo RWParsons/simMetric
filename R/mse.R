@@ -29,7 +29,7 @@ mse <- function(true_value, estimates, get=c("mse", "mse_mcse"), na.rm=FALSE, ..
   }
 
   n <- length(squared_errors)
-  x['mse'] <- sum(squared_errors)/n
+  x['mse'] <- mean(squared_errors)
   x['mse_mcse'] <- sqrt(sum((squared_errors - x['mse'])^2)/(n*(n-1)))
   return(x[get])
 }
