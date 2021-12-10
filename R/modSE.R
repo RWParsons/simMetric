@@ -27,8 +27,8 @@ modSE <- function(se, get=c("modSE", "modSE_mcse"), na.rm=FALSE, ...){
   }
 
   n <- length(se)
-  x["modSE"] <- sqrt(sum(se)/n)
-  numerator <- (1/(n-1)) * sum( (se - x['modSE'])^2 )
+  x["modSE"] <- sqrt(sum(se^2)/n)
+  numerator <- (1/(n-1)) * sum( (se^2 - x['modSE']^2)^2 )
   x['modSE_mcse'] <- sqrt(numerator/(4*n * (x['modSE']^2)))
   return(x[get])
 }

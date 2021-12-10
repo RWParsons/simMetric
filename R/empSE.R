@@ -28,7 +28,7 @@ empSE <- function(estimates, get=c("empSE", "empSE_mcse"), na.rm=FALSE, ...){
   }
 
   n <- length(deviations)
-  x["empSE"] <- sqrt(sum(deviations^2) * (1/(n-1)))
+  x["empSE"] <- sqrt(sum(deviations^2) / (n-1))
   x["empSE_mcse"] <- x["empSE"]/sqrt(2*(n-1))
   return(x[get])
 }

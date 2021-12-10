@@ -1,7 +1,7 @@
 test_that("modSE() estimation works", {
   set.seed(42)
   modSE_vec <- modSE(se=rnorm(n=50, mean=16, sd=2))
-  expect_equal(round(modSE_vec[['modSE']]), sqrt(16))
+  expect_equal(round(modSE_vec[['modSE']]), 16)
 })
 
 test_that("modSE() handles NAs", {
@@ -14,5 +14,5 @@ test_that("modSE() handles NAs", {
   expect_equal(modSE_vec[['modSE']], NA)
 
   modSE_vec <- modSE(se=se, na.rm=T)
-  expect_equal(round(modSE_vec[['modSE']]), sqrt(9))
+  expect_equal(round(modSE_vec[['modSE']]), 9)
 })

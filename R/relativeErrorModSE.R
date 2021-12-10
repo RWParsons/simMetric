@@ -27,7 +27,7 @@ relativeErrorModSE <- function(se, estimates, get=c("relativeErrorModSE", "relat
   modSE_est <- modSE(se=se, get="modSE", na.rm=na.rm)
 
   x["relativeErrorModSE"] <- 100*((modSE_est/empSE_est) - 1)
-  numerator <- (1/(n-1)) * sum( (se - modSE_est)^2 )
+  numerator <- (1/(n-1)) * sum( (se^2 - modSE_est^2)^2 )
   x['relativeErrorModSE_mcse'] <- 100*(modSE_est/empSE_est)*sqrt(numerator/(4*n*(modSE_est^4)) + (1/(2*(n-1))) )
 
 
