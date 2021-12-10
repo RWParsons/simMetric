@@ -51,6 +51,17 @@ join_metrics <- function(
   assertthat::assert_that(all(id_cols %in% names(data)))
   assertthat::assert_that(length(id_cols) == length(unique(id_cols)))
 
+  metrics_appropriate <- c("bais", "biasEliminatedCoverage", "coverage", "empSE", "modSE", "mse", "rejection", "relativeErrorModSE")
+
+  if(!all(metrics %in% metrics_appropriate)){
+    warning(
+      paste0("The following metrics provided are not appropriate for this function:", paste0(metrics[!metrics %in% metrics_appropriate], collapse=", "),
+             "\nThese will be ignored.\nThis function can only handle the following metrics:", paste0(metrics_appropriate, collapse=", "))
+    )
+    metrics <- metrics[metrics %in% metrics_appropriate]
+  }
+
+
   if(length(true_value)==1 & is.numeric(true_value)){
     # if the argument is given as a value, assign the column to be that value
     data$true_value_col <- true_value
@@ -67,17 +78,25 @@ join_metrics <- function(
     df_do <- df[df$.group_id == id,]
 
     parms_list <- list()
+    # add upper and lower limits
     if("coverage" %in% metrics){
       parms_list <- c(parms_list, list(ll=df_do[[ll_col]], ul=df_do[[ul_col]]))
     }
-    if(any(c("bias", "empSE", "mse") %in% metrics)){
+    # add estimates
+    if(any(c("bias", "empSE", "mse", "relativeErrorModSE") %in% metrics)){
       parms_list <- c(parms_list, list(estimates=df_do[[estimates_col]]))
     }
+    # add true value
     if(any(c("coverage", "bias", "mse") %in% metrics)){
       parms_list <- c(parms_list, list(true_value=df_do[[true_value_col]]))
     }
+    # add p-value
     if("rejection" %in% metrics){
       parms_list <- c(parms_list, list(p=df_do[[p_col]], alpha=alpha))
+    }
+    # add standard error
+    if(any(c("modSE", "relativeErrorModSE") %in% metrics)){
+      parms_list <- c(parms_list, list(se=df_do[[se_col]]))
     }
 
     metrics <- purrr::map(metrics, function(m) do.call(m, parms_list))
