@@ -1,13 +1,13 @@
 Package: simMetric
 Title: Metrics (with Uncertainty) for Simulation Studies that Evaluate Statistical Methods
-Version: 0.0.0.9000
+Version: 0.1.0
 Authors@R: 
-    person(given = "First",
-           family = "Last",
+    person(given = "Rex",
+           family = "Parsons",
            role = c("aut", "cre"),
-           email = "first.last@example.com",
-           comment = c(ORCID = "YOUR-ORCID-ID"))
-Description: What the package does (one paragraph).
+           email = "rex.parsons94@gmail.com",
+           comment = c(ORCID = "0000-0002-6053-8174"))
+Description: Allows users to quickly apply selected or many metrics to evaluate Monte Carlo simulation studies.
 License: MIT + file LICENSE
 Encoding: UTF-8
 LazyData: true
