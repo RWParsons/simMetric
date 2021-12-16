@@ -110,7 +110,7 @@ clusterExport(cl, ls()[!ls() %in% 'cl']) # send the grid and functions to each n
 x <- clusterEvalQ(cl, require(tidyverse, quietly=T)) # load the tidyverse on each node
 
 start <- Sys.time()
-ll <- parallel::parLapply(
+ll <- parLapply(
   cl, 
   1:nrow(g),
   function(r) fit_one_model(grid=g, r)
@@ -142,8 +142,6 @@ df_metrics <- join_metrics(
   se_col="std.error"
 )
 
-
-
 head(df_metrics)
 #> # A tibble: 5 x 11
 #>   n_obs coverage coverage_mcse      mse  mse_mcse  modSE modSE_mcse  empSE
@@ -160,7 +158,8 @@ head(df_metrics)
 ### Get metrics within usual tidy workflow with `group_by()` and `summarise()`
 
 ``` r
-par_res %>%
+df_metrics <-
+  par_res %>%
   group_by(n_obs) %>%
   summarise(
     coverage_estimate=coverage(true_value=effect, ll=conf.low, ul=conf.high, get="coverage"),
@@ -168,6 +167,7 @@ par_res %>%
     mean_squared_error_estimate=mse(true_value=effect, estimates=estimate, get="mse"),
     mean_squared_error_mcse=mse(true_value=effect, estimates=estimate, get="mse_mcse")
   ) 
+head(df_metrics)
 #> # A tibble: 5 x 5
 #>   n_obs coverage_estimate coverage_mcse mean_squared_error_e~ mean_squared_erro~
 #>   <dbl>             <dbl>         <dbl>                 <dbl>              <dbl>
@@ -177,3 +177,25 @@ par_res %>%
 #> 4    40              0.95        0.0218              0.000259          0.0000394
 #> 5    50              0.95        0.0218              0.000223          0.0000366
 ```
+
+### Plot the the Mean Squared Error (MSE) as the number of observations increases
+
+The model estimates are closer to the truth (MSE is lower) as the sample
+used to fit the model increases in size. The Monte Carlo standard error
+can easily be visualised to convey the uncertainty in these estimates.
+
+``` r
+df_metrics %>%
+  ggplot(aes(n_obs, mean_squared_error_estimate)) +
+  geom_point() +
+  geom_errorbar(aes(ymin=mean_squared_error_estimate-mean_squared_error_mcse, 
+                    ymax=mean_squared_error_estimate+mean_squared_error_mcse),
+                width=0) +
+  theme_bw() +
+  labs(x="Number of observations", 
+       y="Mean Squared Error\n",
+       caption="\n(Error bars represent Monte Carlo standard error)") +
+  scale_y_continuous(labels=scales::comma, limits=c(0, 0.0015))
+```
+
+<img src="man/figures/README-unnamed-chunk-8-1.png" width="100%" />
