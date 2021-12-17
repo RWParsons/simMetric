@@ -5,7 +5,7 @@ Authors@R:
     person(given = "Rex",
            family = "Parsons",
            role = c("aut", "cre"),
-           email = "rex.parsons94@gmail.com",
+           email = "Rex.Parsons94@gmail.com",
            comment = c(ORCID = "0000-0002-6053-8174"))
 Description: Allows users to quickly apply individual or multiple metrics to evaluate Monte Carlo simulation studies.
 License: MIT + file LICENSE
