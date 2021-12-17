@@ -51,7 +51,7 @@ join_metrics <- function(
   assertthat::assert_that(all(id_cols %in% names(data)))
   assertthat::assert_that(length(id_cols) == length(unique(id_cols)))
 
-  metrics_appropriate <- c("bais", "biasEliminatedCoverage", "coverage", "empSE", "modSE", "mse", "rejection", "relativeErrorModSE")
+  metrics_appropriate <- c("bias", "biasEliminatedCoverage", "coverage", "empSE", "modSE", "mse", "rejection", "relativeErrorModSE")
 
   if(!all(metrics %in% metrics_appropriate)){
     warning(

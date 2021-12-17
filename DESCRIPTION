@@ -7,7 +7,7 @@ Authors@R:
            role = c("aut", "cre"),
            email = "rex.parsons94@gmail.com",
            comment = c(ORCID = "0000-0002-6053-8174"))
-Description: Allows users to quickly apply selected or many metrics to evaluate Monte Carlo simulation studies.
+Description: Allows users to quickly apply individual or multiple metrics to evaluate Monte Carlo simulation studies.
 License: MIT + file LICENSE
 Encoding: UTF-8
 LazyData: true
