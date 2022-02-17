@@ -1,6 +1,6 @@
 Package: simMetric
 Title: Metrics (with Uncertainty) for Simulation Studies that Evaluate Statistical Methods
-Version: 0.1.0
+Version: 0.1.9000
 Authors@R: 
     person(given = "Rex",
            family = "Parsons",
