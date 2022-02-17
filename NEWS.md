@@ -1,3 +1,6 @@
+# simMetric (development version)
+
+
 # simMetric 0.1.0
 
 First submission to CRAN. `simMetric` can be used to:
