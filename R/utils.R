@@ -71,8 +71,8 @@ join_metrics <- function(
     true_value_col <- true_value
   }
 
-  df_grouped <- dplyr::group_by(.data=data, dplyr::across(dplyr::all_of(id_cols))) |>
-    dplyr::mutate(.group_id=dplyr::cur_group_id())
+  df_grouped <- dplyr::group_by(.data=data, dplyr::across(dplyr::all_of(id_cols)))
+  df_grouped <- dplyr::mutate(df_grouped, .group_id=dplyr::cur_group_id())
 
   get_metrics_group <- function(df, id){
     df_do <- df[df$.group_id == id,]

@@ -12,11 +12,12 @@ test_that("add a column to dataframe", {
   )
   expect_silent({
     test_df$cov <- coverage(true_value=0, ll=test_df$ll, ul=test_df$ul, get=c("coverage"))
-    test_df |>
-      dplyr::group_by(group_id) |>
-      dplyr::summarize(
-        coverage=coverage(true_value=0, ll=ll, ul=ul, get=c("coverage")),
-        coverage_mcse=coverage(true_value=0, ll=ll, ul=ul, get=c("coverage_mcse"))
-      )
+
+    test_df_grouped <- dplyr::group_by(test_df, group_id)
+
+    dplyr::summarize(test_df_grouped,
+      coverage=coverage(true_value=0, ll=ll, ul=ul, get=c("coverage")),
+      coverage_mcse=coverage(true_value=0, ll=ll, ul=ul, get=c("coverage_mcse"))
+    )
   })
 })
