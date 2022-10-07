@@ -99,11 +99,17 @@ join_metrics <- function(
       parms_list <- c(parms_list, list(se=df_do[[se_col]]))
     }
 
-    metrics <- purrr::map(metrics, function(m) do.call(m, parms_list))
+    metrics <- lapply(metrics, function(m) do.call(m, parms_list))
     unlist(c(metrics, list(.group_id=id)))
   }
 
-  df_metrics <- purrr::map_dfr(unique(df_grouped$.group_id), function(x) get_metrics_group(df=df_grouped, id=x))
+  df_metrics <- as.data.frame(do.call(
+    "rbind",
+    lapply(
+      unique(df_grouped$.group_id),
+      function(x) get_metrics_group(df=df_grouped, id=x)
+    )
+  ))
 
   df_out <-
     dplyr::left_join(
