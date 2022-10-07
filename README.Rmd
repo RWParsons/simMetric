@@ -16,6 +16,9 @@ knitr::opts_chunk$set(
 # simMetric
 
 <!-- badges: start -->
+[![CRAN downloads](https://cranlogs.r-pkg.org/badges/last-month/simMetric)](https://www.r-pkg.org/pkg/simMetric)
+[![DOI:10.25912/RDF_1665114451679](http://img.shields.io/badge/DOI-10.25912/RDF_1665114451679-43A6C6.svg)](https://doi.org/10.25912/RDF_1665114451679)
+[![R-CMD-check](https://github.com/RWParsons/simMetric/workflows/R-CMD-check/badge.svg)](https://github.com/RWParsons/simMetric/actions)
 <!-- badges: end -->
 
 `simMetric` is an R package that provides metrics (and their Monte Carlo standard errors) for the assessment of statistical methods in simulation studies.  This package includes metrics that are calculated as per this [tutorial](https://doi.org/10.1002/sim.8086) published by Tim Morris, Ian White and Michael Crowther. For an in-depth description on the calculation and interpretation, and how to perform a simulation study in general, refer to the tutorial.
@@ -129,7 +132,6 @@ fit_one_model(g, 1)
 library(parallel)
 cl <- parallelly::autoStopCluster(makeCluster(detectCores()))
 clusterExport(cl, ls()[!ls() %in% 'cl']) # send the grid and functions to each node
-# x <- clusterEvalQ(cl, require(tidyverse, quietly=T)) # load the tidyverse on each node
 x <- clusterEvalQ(cl, require(tidyverse, quietly=T)) # load the tidyverse on each node
 
 start <- Sys.time()
