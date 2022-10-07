@@ -1,0 +1,18 @@
+citHeader("To cite simMetric in publications use:")
+
+citEntry(
+  entry    = "Manual",
+  title    = "simMetric: Metrics (with Uncertainty) for Simulation Studies that Evaluate Statistical Methods",
+  author   = as.person("Rex Parsons"),
+  journal  = "Queensland University of Technology",
+  year     = 2022,
+  url      = "https://doi.org/10.25912/RDF_1665114451679",
+  doi      = "10.25912/RDF_1665114451679",
+  textVersion =
+  paste("Parsons, Rex; (2022): simMetric: Metrics (with Uncertainty) for ",
+        "Simulation Studies that Evaluate Statistical Methods. Queensland ",
+        "University of Technology. (Software) ",
+        "https://doi.org/10.25912/RDF_1665114451679"
+
+  )
+)
