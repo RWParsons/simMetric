@@ -1,18 +1,36 @@
 citHeader("To cite simMetric in publications use:")
 
 citEntry(
-  entry    = "Manual",
+  entry    = "Misc",
   title    = "simMetric: Metrics (with Uncertainty) for Simulation Studies that Evaluate Statistical Methods",
   author   = as.person("Rex Parsons"),
-  journal  = "Queensland University of Technology",
+  publisher= "Queensland University of Technology",
   year     = 2022,
+  license  = "MIT",
   url      = "https://doi.org/10.25912/RDF_1665114451679",
   doi      = "10.25912/RDF_1665114451679",
+  note     = "R package version 0.1.9000",
   textVersion =
-  paste("Parsons, Rex; (2022): simMetric: Metrics (with Uncertainty) for ",
+  paste("Parsons, Rex (2022): simMetric: Metrics (with Uncertainty) for ",
         "Simulation Studies that Evaluate Statistical Methods. Queensland ",
         "University of Technology. (Software) ",
         "https://doi.org/10.25912/RDF_1665114451679"
 
+  )
+)
+
+
+citEntry(
+  entry     = "Manual",
+  title     = "simMetric: Metrics (with Uncertainty) for Simulation Studies that Evaluate Statistical Methods",
+  author    = as.person("Rex Parsons"),
+  year      = 2022,
+  note      = "R package version 0.1.9000",
+  url       = "https://CRAN.R-project.org/package=dplyr",
+  textVersion =
+  paste("Parsons, Rex (2022). simMetric: Metrics (with Uncertainty) for",
+        "Simulation Studies that Evaluate Statistical Methods.",
+        "R package version 0.1.9000,",
+        "<https://CRAN.R-project.org/package=simMetric>."
   )
 )
