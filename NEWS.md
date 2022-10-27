@@ -1,5 +1,8 @@
-# simMetric (development version)
+# simMetric 0.1.1
 
+* avoid unnecessary use of base R pipe (`|>`) and associated dependency on R>=4.1.0.
+* avoid unnecessary dependency on `{purrr}`.
+* add citation for entry on QUT research data finder (<https://researchdatafinder.qut.edu.au/display/n43368>)
 
 # simMetric 0.1.0
 

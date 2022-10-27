@@ -1,7 +1,9 @@
-## Test environments
-* local R installation (win), R-4.1.2
-* win-builder (R-devel), R-4.2.0
-* macOS-builder (R-release), 4.1.1
+## Test environments via `usethis::use_github_action_check_standard()`
+* macOS-latest (release)
+* windows-latest (release)
+* ubuntu-latest (devel)
+* ubuntu-latest (release)
+* ubuntu-latest (oldrel-1)
 
 ## R CMD check results
 
@@ -10,7 +12,5 @@
 R CMD check succeeded
 
 ## Release summary
-
-* This is the first release of this package to CRAN.
 
 * A NEWS.md file is included.
