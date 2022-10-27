@@ -12,19 +12,19 @@
 #' @return A named vector containing the estimate and the Monte Carlo standard error for the coverage.
 #' @export
 #'
-#' @examples biasEliminatedCoverage(estimates=rnorm(4), ll=c(-1, -1, -1, -1), ul=c(1, 1, 1, -0.5))
-biasEliminatedCoverage <- function(estimates, ll, ul, get=c("biasEliminatedCoverage", "biasEliminatedCoverage_mcse"), na.rm=FALSE, ...){
+#' @examples biasEliminatedCoverage(estimates = rnorm(4), ll = c(-1, -1, -1, -1), ul = c(1, 1, 1, -0.5))
+biasEliminatedCoverage <- function(estimates, ll, ul, get = c("biasEliminatedCoverage", "biasEliminatedCoverage_mcse"), na.rm = FALSE, ...) {
   assertthat::assert_that(length(!is.na(ul) > 0 & !is.na(ll)) > 0)
   x <- c()
 
-  if(na.rm){
+  if (na.rm) {
     ul <- ul[!is.na(ul) & !is.na(ll)]
     ll <- ll[!is.na(ul) & !is.na(ll)]
     estimates <- estimates[!is.na(estimates)]
   }
   assertthat::assert_that(length(ll) == length(ul) & length(ul) == length(estimates))
 
-  if(any(is.na(c(ul, ll)))){
+  if (any(is.na(c(ul, ll)))) {
     x["biasEliminatedCoverage"] <- NA
     x["biasEliminatedCoverage_mcse"] <- NA
     return(x[get])
@@ -36,6 +36,6 @@ biasEliminatedCoverage <- function(estimates, ll, ul, get=c("biasEliminatedCover
   n <- length(covered)
 
   x["biasEliminatedCoverage"] <- mean(covered)
-  x["biasEliminatedCoverage_mcse"] <- sqrt((x["biasEliminatedCoverage"]*(1-x["biasEliminatedCoverage"]))/n)
+  x["biasEliminatedCoverage_mcse"] <- sqrt((x["biasEliminatedCoverage"] * (1 - x["biasEliminatedCoverage"])) / n)
   return(x[get])
 }

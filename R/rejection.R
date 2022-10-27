@@ -11,18 +11,18 @@
 #' @return A named vector containing the estimate and the Monte Carlo standard error for the rejection.
 #' @export
 #'
-#' @examples rejection(p=runif(200, min=0, max=1))
-rejection <- function(p, alpha=0.05, get=c("rejection", "rejection_mcse"), na.rm=FALSE, ...){
+#' @examples rejection(p = runif(200, min = 0, max = 1))
+rejection <- function(p, alpha = 0.05, get = c("rejection", "rejection_mcse"), na.rm = FALSE, ...) {
   assertthat::assert_that(length(!is.na(p)) > 0)
 
   x <- c()
-  if(na.rm){
+  if (na.rm) {
     p <- p[!is.na(p)]
   }
 
   rejections <- p <= alpha
 
-  if(any(is.na(rejections))){
+  if (any(is.na(rejections))) {
     x["rejection"] <- NA
     x["rejection_mcse"] <- NA
     return(x[get])
@@ -30,6 +30,6 @@ rejection <- function(p, alpha=0.05, get=c("rejection", "rejection_mcse"), na.rm
 
   n <- length(p)
   x["rejection"] <- mean(rejections)
-  x["rejection_mcse"] <- sqrt((x["rejection"] * (1-x["rejection"]))/n)
+  x["rejection_mcse"] <- sqrt((x["rejection"] * (1 - x["rejection"])) / n)
   return(x)
 }

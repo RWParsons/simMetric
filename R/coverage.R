@@ -12,18 +12,18 @@
 #' @return A named vector containing the estimate and the Monte Carlo standard error for the coverage.
 #' @export
 #'
-#' @examples coverage(true_value=0, ll=c(-1, -1, -1, -1), ul=c(1, 1, 1, -0.5))
-coverage <- function(true_value, ll, ul, get=c("coverage", "coverage_mcse"), na.rm=FALSE, ...){
+#' @examples coverage(true_value = 0, ll = c(-1, -1, -1, -1), ul = c(1, 1, 1, -0.5))
+coverage <- function(true_value, ll, ul, get = c("coverage", "coverage_mcse"), na.rm = FALSE, ...) {
   assertthat::assert_that(length(!is.na(ul) & !is.na(ll)) > 0)
   x <- c()
 
-  if(na.rm){
+  if (na.rm) {
     ul <- ul[!is.na(ul) & !is.na(ll)]
     ll <- ll[!is.na(ul) & !is.na(ll)]
   }
   assertthat::assert_that(length(ll) == length(ul))
 
-  if(any(is.na(c(ul, ll)))){
+  if (any(is.na(c(ul, ll)))) {
     x["coverage"] <- NA
     x["coverage_mcse"] <- NA
     return(x[get])
@@ -34,6 +34,6 @@ coverage <- function(true_value, ll, ul, get=c("coverage", "coverage_mcse"), na.
   n <- length(covered)
 
   x["coverage"] <- mean(covered)
-  x["coverage_mcse"] <- sqrt((x["coverage"]*(1-x["coverage"]))/n)
+  x["coverage_mcse"] <- sqrt((x["coverage"] * (1 - x["coverage"])) / n)
   return(x[get])
 }

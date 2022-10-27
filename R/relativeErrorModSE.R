@@ -11,24 +11,24 @@
 #' @return A named vector containing the estimate and the Monte Carlo standard error for the relative (%) error in model standard error.
 #' @export
 #'
-#' @examples relativeErrorModSE(se=rnorm(n=1000, mean=10, sd=0.5), estimates=rnorm(n=1000))
-relativeErrorModSE <- function(se, estimates, get=c("relativeErrorModSE", "relativeErrorModSE_mcse"), na.rm=FALSE, ...){
+#' @examples relativeErrorModSE(se = rnorm(n = 1000, mean = 10, sd = 0.5), estimates = rnorm(n = 1000))
+relativeErrorModSE <- function(se, estimates, get = c("relativeErrorModSE", "relativeErrorModSE_mcse"), na.rm = FALSE, ...) {
   assertthat::assert_that(length(!is.na(se)) == length(!is.na(estimates)))
   n <- length(!is.na(se))
 
-  if(any(is.na(c(se, estimates))) & na.rm==FALSE){
+  if (any(is.na(c(se, estimates))) & na.rm == FALSE) {
     x["relativeErrorModSE"] <- NA
     x["relativeErrorModSE_mcse"] <- NA
     return(x[get])
   }
 
   x <- c()
-  empSE_est <- empSE(estimates=estimates, get="empSE", na.rm=na.rm)
-  modSE_est <- modSE(se=se, get="modSE", na.rm=na.rm)
+  empSE_est <- empSE(estimates = estimates, get = "empSE", na.rm = na.rm)
+  modSE_est <- modSE(se = se, get = "modSE", na.rm = na.rm)
 
-  x["relativeErrorModSE"] <- 100*((modSE_est/empSE_est) - 1)
-  numerator <- (1/(n-1)) * sum( (se^2 - modSE_est^2)^2 )
-  x['relativeErrorModSE_mcse'] <- 100*(modSE_est/empSE_est)*sqrt(numerator/(4*n*(modSE_est^4)) + (1/(2*(n-1))) )
+  x["relativeErrorModSE"] <- 100 * ((modSE_est / empSE_est) - 1)
+  numerator <- (1 / (n - 1)) * sum((se^2 - modSE_est^2)^2)
+  x["relativeErrorModSE_mcse"] <- 100 * (modSE_est / empSE_est) * sqrt(numerator / (4 * n * (modSE_est^4)) + (1 / (2 * (n - 1))))
 
 
   return(x[get])

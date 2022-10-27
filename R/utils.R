@@ -19,95 +19,95 @@
 #'
 #' @examples
 #' simulations_df <- data.frame(
-#'   idx=rep(1:10, 100),
-#'   idx2=sample(c("a", "b"), size=1000, replace=TRUE),
-#'   p_value=runif(1000),
-#'   est=rnorm(n=1000),
-#'   conf.ll= rnorm(n=1000, mean=-20),
-#'   conf.ul= rnorm(n=1000, mean=20)
+#'   idx = rep(1:10, 100),
+#'   idx2 = sample(c("a", "b"), size = 1000, replace = TRUE),
+#'   p_value = runif(1000),
+#'   est = rnorm(n = 1000),
+#'   conf.ll = rnorm(n = 1000, mean = -20),
+#'   conf.ul = rnorm(n = 1000, mean = 20)
 #' )
 #' res <- join_metrics(
-#'   data=simulations_df,
-#'   id_cols=c("idx", "idx2"),
-#'   metrics=c("rejection", "coverage", "mse"),
-#'   true_value=0,
-#'   ll_col="conf.ll",
-#'   ul_col="conf.ul",
-#'   estimates_col="est",
-#'   p_col="p_value",
+#'   data = simulations_df,
+#'   id_cols = c("idx", "idx2"),
+#'   metrics = c("rejection", "coverage", "mse"),
+#'   true_value = 0,
+#'   ll_col = "conf.ll",
+#'   ul_col = "conf.ul",
+#'   estimates_col = "est",
+#'   p_col = "p_value",
 #' )
-join_metrics <- function(
-  data,
-  id_cols,
-  metrics=c("coverage", "mse", "modSE"),
-  true_value=NULL,
-  ll_col=NULL,
-  ul_col=NULL,
-  estimates_col=NULL,
-  se_col=NULL,
-  p_col=NULL,
-  alpha=0.05){
-
+join_metrics <- function(data,
+                         id_cols,
+                         metrics = c("coverage", "mse", "modSE"),
+                         true_value = NULL,
+                         ll_col = NULL,
+                         ul_col = NULL,
+                         estimates_col = NULL,
+                         se_col = NULL,
+                         p_col = NULL,
+                         alpha = 0.05) {
   assertthat::assert_that(all(id_cols %in% names(data)))
   assertthat::assert_that(length(id_cols) == length(unique(id_cols)))
 
   metrics_appropriate <- c("bias", "biasEliminatedCoverage", "coverage", "empSE", "modSE", "mse", "rejection", "relativeErrorModSE")
 
-  if(!all(metrics %in% metrics_appropriate)){
+  if (!all(metrics %in% metrics_appropriate)) {
     warning(
-      paste0("The following metrics provided are not appropriate for this function:", paste0(metrics[!metrics %in% metrics_appropriate], collapse=", "),
-             "\nThese will be ignored.\nThis function can only handle the following metrics:", paste0(metrics_appropriate, collapse=", "))
+      paste0(
+        "The following metrics provided are not appropriate for this function:", paste0(metrics[!metrics %in% metrics_appropriate], collapse = ", "),
+        "\nThese will be ignored.\nThis function can only handle the following metrics:", paste0(metrics_appropriate, collapse = ", ")
+      )
     )
     metrics <- metrics[metrics %in% metrics_appropriate]
   }
 
 
-  if(length(true_value)==1 & is.numeric(true_value)){
+  if (length(true_value) == 1 & is.numeric(true_value)) {
     # if the argument is given as a value, assign the column to be that value
     data$true_value_col <- true_value
     true_value_col <- "true_value_col"
-  }else{
+  } else {
     # if the argument given is the name of the column, store that name to be used later
     true_value_col <- true_value
   }
 
-  df_grouped <- dplyr::group_by(.data=data, dplyr::across(dplyr::all_of(id_cols)))
-  df_grouped <- dplyr::mutate(df_grouped, .group_id=dplyr::cur_group_id())
+  df_grouped <- dplyr::group_by(.data = data, dplyr::across(dplyr::all_of(id_cols)))
+  df_grouped <- dplyr::mutate(df_grouped, .group_id = dplyr::cur_group_id())
 
-  get_metrics_group <- function(df, id){
-    df_do <- df[df$.group_id == id,]
+  get_metrics_group <- function(df, id) {
+    df_do <- df[df$.group_id == id, ]
 
     parms_list <- list()
     # add upper and lower limits
-    if("coverage" %in% metrics){
-      parms_list <- c(parms_list, list(ll=df_do[[ll_col]], ul=df_do[[ul_col]]))
+    if ("coverage" %in% metrics) {
+      parms_list <- c(parms_list, list(ll = df_do[[ll_col]], ul = df_do[[ul_col]]))
     }
     # add estimates
-    if(any(c("bias", "empSE", "mse", "relativeErrorModSE") %in% metrics)){
-      parms_list <- c(parms_list, list(estimates=df_do[[estimates_col]]))
+    if (any(c("bias", "empSE", "mse", "relativeErrorModSE") %in% metrics)) {
+      parms_list <- c(parms_list, list(estimates = df_do[[estimates_col]]))
     }
     # add true value
-    if(any(c("coverage", "bias", "mse") %in% metrics)){
-      parms_list <- c(parms_list, list(true_value=df_do[[true_value_col]]))
+    if (any(c("coverage", "bias", "mse") %in% metrics)) {
+      parms_list <- c(parms_list, list(true_value = df_do[[true_value_col]]))
     }
     # add p-value
-    if("rejection" %in% metrics){
-      parms_list <- c(parms_list, list(p=df_do[[p_col]], alpha=alpha))
+    if ("rejection" %in% metrics) {
+      parms_list <- c(parms_list, list(p = df_do[[p_col]], alpha = alpha))
     }
     # add standard error
-    if(any(c("modSE", "relativeErrorModSE") %in% metrics)){
-      parms_list <- c(parms_list, list(se=df_do[[se_col]]))
+    if (any(c("modSE", "relativeErrorModSE") %in% metrics)) {
+      parms_list <- c(parms_list, list(se = df_do[[se_col]]))
     }
 
     metrics <- lapply(metrics, function(m) do.call(m, parms_list))
-    unlist(c(metrics, list(.group_id=id)))
+    unlist(c(metrics, list(.group_id = id)))
   }
 
   df_metrics <- as.data.frame(do.call(
     "rbind",
     lapply(
       unique(df_grouped$.group_id),
-      function(x) get_metrics_group(df=df_grouped, id=x)
+      function(x) get_metrics_group(df = df_grouped, id = x)
     )
   ))
 
@@ -115,7 +115,7 @@ join_metrics <- function(
     dplyr::left_join(
       dplyr::distinct(df_grouped[, c(id_cols, ".group_id")]),
       df_metrics,
-      by=".group_id"
+      by = ".group_id"
     )
   df_out$.group_id <- NULL
   dplyr::ungroup(df_out)

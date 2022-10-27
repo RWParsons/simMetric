@@ -10,25 +10,25 @@
 #' @return A named vector containing the estimate and the Monte Carlo standard error for the average model standard error.
 #' @export
 #'
-#' @examples modSE(se=runif(n=20, min=1, max=1.5))
-modSE <- function(se, get=c("modSE", "modSE_mcse"), na.rm=FALSE, ...){
+#' @examples modSE(se = runif(n = 20, min = 1, max = 1.5))
+modSE <- function(se, get = c("modSE", "modSE_mcse"), na.rm = FALSE, ...) {
   assertthat::assert_that(length(!is.na(se)) > 0)
   assertthat::assert_that(all(se[!is.na(se)] > 0))
 
   x <- c()
-  if(na.rm){
+  if (na.rm) {
     se <- se[!is.na(se)]
   }
 
-  if(any(is.na(se))){
+  if (any(is.na(se))) {
     x["modSE"] <- NA
     x["modSE_mcse"] <- NA
     return(x[get])
   }
 
   n <- length(se)
-  x["modSE"] <- sqrt(sum(se^2)/n)
-  numerator <- (1/(n-1)) * sum( (se^2 - x['modSE']^2)^2 )
-  x['modSE_mcse'] <- sqrt(numerator/(4*n * (x['modSE']^2)))
+  x["modSE"] <- sqrt(sum(se^2) / n)
+  numerator <- (1 / (n - 1)) * sum((se^2 - x["modSE"]^2)^2)
+  x["modSE_mcse"] <- sqrt(numerator / (4 * n * (x["modSE"]^2)))
   return(x[get])
 }
